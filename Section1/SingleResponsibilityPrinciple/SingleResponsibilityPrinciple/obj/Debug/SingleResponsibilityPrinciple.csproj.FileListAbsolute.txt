@@ -5,3 +5,9 @@ C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPri
 C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.csproj.CoreCompileInputs.cache
 C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.exe
 C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.pdb
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.exe.config
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.exe
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.pdb
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.csproj.CoreCompileInputs.cache
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.exe
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section1\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.pdb
