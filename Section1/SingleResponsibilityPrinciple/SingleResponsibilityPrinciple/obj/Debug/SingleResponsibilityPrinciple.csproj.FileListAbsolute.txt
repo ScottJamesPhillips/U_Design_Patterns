@@ -1,0 +1,7 @@
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.exe.config
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.exe
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\bin\Debug\SingleResponsibilityPrinciple.pdb
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.csprojAssemblyReference.cache
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.csproj.CoreCompileInputs.cache
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.exe
+C:\Users\MOOV\source\repos\SingleResponsibilityPrinciple\SingleResponsibilityPrinciple\obj\Debug\SingleResponsibilityPrinciple.pdb
