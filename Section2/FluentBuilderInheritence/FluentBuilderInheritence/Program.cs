@@ -50,7 +50,6 @@ namespace FluentBuilderInheritence
     {
         //protected as using inheritence
         //meaning person can only be accessed by classes derived from PersonInfoBuilder
-        protected Person person = new Person();
 
         //fluent builder approach
         public SELF Called(string name)
@@ -60,24 +59,12 @@ namespace FluentBuilderInheritence
         }
     }
 
-
-
-
-    //public class PersonDishBuilder<SELF>:PersonInfoBuilder<PersonDishBuilder<SELF>> where SELF: PersonDishBuilder<SELF>
-    //{
-    //    public SELF WantsToEat(string dish)
-    //    {
-    //        person.Dish.Name = dish;
-    //        //person.Dish.Cuisine = cuisine;
-    //        return (SELF) this;
-    //    }
-    //}
-
     public class PersonMealBuilder<SELF> : PersonInfoBuilder<PersonMealBuilder<SELF>> where SELF : PersonMealBuilder<SELF>
     {
-        public SELF WantsToOrder()
+        public SELF WantsToOrder(string drink)
         {
             person.Meal = new Meal();
+            person.Meal.Drink = drink;
             return (SELF)this;
         }
     }
@@ -92,14 +79,14 @@ namespace FluentBuilderInheritence
         }
     }
 
-    public class PersonDrinkBuilder<SELF> : PersonDishBuilder<PersonDrinkBuilder<SELF>> where SELF : PersonDrinkBuilder<SELF>
-    {
-        public SELF WantsToDrink(string drink)
-        {
-            person.Meal.Drink = drink;
-            return (SELF)this;
-        }
-    }
+    //public class PersonDrinkBuilder<SELF> : PersonDishBuilder<PersonDrinkBuilder<SELF>> where SELF : PersonDrinkBuilder<SELF>
+    //{
+    //    public SELF WantsToDrink(string drink)
+    //    {
+    //        person.Meal.Drink = drink;
+    //        return (SELF)this;
+    //    }
+    //}
 
     public class PersonDishCuisineBuilder<SELF> : PersonDishBuilder<PersonDishCuisineBuilder<SELF>> where SELF : PersonDishCuisineBuilder<SELF>
     {
@@ -110,9 +97,6 @@ namespace FluentBuilderInheritence
         }
     }
 
-
-
-
     // internal - Only accessible within the same assembly.
     internal class Program
     {
@@ -120,11 +104,13 @@ namespace FluentBuilderInheritence
         {
             Person person = Person.New
              .Called("Scott")
-             .WantsToOrder()
+             .WantsToOrder("Coke")
              .WantsToEat("Pizza")
-             .WantsToDrink("Coke")
+             //.WantsToDrink("Coke")
              .OfThisCuisine("Italian")
              .Build();
+
+            Console.WriteLine(person.ToString());
         }
     }
 }
