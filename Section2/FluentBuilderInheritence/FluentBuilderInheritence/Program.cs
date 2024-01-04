@@ -25,8 +25,8 @@ namespace FluentBuilderInheritence
     }
     public class Meal
     {
-       public Dish Dish;
-       public string Drink;
+        public Dish Dish;
+        public string Drink;
     }
 
     public class Dish
@@ -46,7 +46,7 @@ namespace FluentBuilderInheritence
     }
 
     //class Foo:Bar<Foo>, so our derived class is going to derive from itself
-    public class PersonInfoBuilder<SELF>:PersonBuilder where SELF:PersonInfoBuilder<SELF>
+    public class PersonInfoBuilder<SELF> : PersonBuilder where SELF : PersonInfoBuilder<SELF>
     {
         //protected as using inheritence
         //meaning person can only be accessed by classes derived from PersonInfoBuilder
@@ -56,7 +56,7 @@ namespace FluentBuilderInheritence
         public SELF Called(string name)
         {
             person.Name = name;
-            return (SELF) this;
+            return (SELF)this;
         }
     }
 
@@ -78,7 +78,7 @@ namespace FluentBuilderInheritence
         public SELF WantsToOrder()
         {
             person.Meal = new Meal();
-            return (SELF) this;
+            return (SELF)this;
         }
     }
 
