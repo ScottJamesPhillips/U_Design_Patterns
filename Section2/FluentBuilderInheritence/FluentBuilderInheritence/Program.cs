@@ -60,22 +60,44 @@ namespace FluentBuilderInheritence
         }
     }
 
-    public class PersonDishBuilder<SELF>:PersonInfoBuilder<PersonDishBuilder<SELF>> where SELF: PersonDishBuilder<SELF>
+
+
+
+    //public class PersonDishBuilder<SELF>:PersonInfoBuilder<PersonDishBuilder<SELF>> where SELF: PersonDishBuilder<SELF>
+    //{
+    //    public SELF WantsToEat(string dish)
+    //    {
+    //        person.Dish.Name = dish;
+    //        //person.Dish.Cuisine = cuisine;
+    //        return (SELF) this;
+    //    }
+    //}
+
+    public class PersonMealBuilder<SELF> : PersonInfoBuilder<PersonMealBuilder<SELF>> where SELF : PersonMealBuilder<SELF>
     {
-        public SELF WantsToEat(string dish)
+        public SELF WantsToOrder()
         {
-            person.Dish.Name = dish;
-            //person.Dish.Cuisine = cuisine;
+            person.Meal = new Meal();
             return (SELF) this;
         }
     }
 
-    public class PersonDrinkBuilder<SELF> : PersonInfoBuilder<PersonDrinkBuilder<SELF>> where SELF : PersonDrinkBuilder<SELF>
+    public class PersonDishBuilder<SELF> : PersonMealBuilder<PersonDishBuilder<SELF>> where SELF : PersonDishBuilder<SELF>
+    {
+        public SELF WantsToEat(string dish)
+        {
+            person.Meal.Dish = new Dish();
+            person.Meal.Dish.Name = dish;
+            return (SELF)this;
+        }
+    }
+
+    public class PersonDrinkBuilder<SELF> : PersonDishBuilder<PersonDrinkBuilder<SELF>> where SELF : PersonDrinkBuilder<SELF>
     {
         public SELF WantsToDrink(string drink)
         {
-            person.Drink = drink;
-            return (SELF) this;
+            person.Meal.Drink = drink;
+            return (SELF)this;
         }
     }
 
@@ -83,7 +105,7 @@ namespace FluentBuilderInheritence
     {
         public SELF OfThisCuisine(string cuisine)
         {
-            person.Dish.Cuisine = cuisine;
+            person.Meal.Dish.Cuisine = cuisine;
             return (SELF)this;
         }
     }
@@ -96,7 +118,13 @@ namespace FluentBuilderInheritence
     {
         public static void Main(string[] args)
         {
-            Person.New.Called("Scott").WantsToEat("Sweet & Sour").OfThisCuisine("Chinese").Build();
+            Person person = Person.New
+             .Called("Scott")
+             .WantsToOrder()
+             .WantsToEat("Pizza")
+             .WantsToDrink("Coke")
+             .OfThisCuisine("Italian")
+             .Build();
         }
     }
 }
