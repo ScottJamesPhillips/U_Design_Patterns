@@ -1,0 +1,7 @@
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\bin\Debug\StepwiseBuilder.exe.config
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\bin\Debug\StepwiseBuilder.exe
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\bin\Debug\StepwiseBuilder.pdb
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\obj\Debug\StepwiseBuilder.csprojAssemblyReference.cache
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\obj\Debug\StepwiseBuilder.csproj.CoreCompileInputs.cache
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\obj\Debug\StepwiseBuilder.exe
+C:\Users\MOOV\source\repos\U_Design_Patterns\Section2\StepwiseBuilder\StepwiseBuilder\StepwiseBuilder\obj\Debug\StepwiseBuilder.pdb
