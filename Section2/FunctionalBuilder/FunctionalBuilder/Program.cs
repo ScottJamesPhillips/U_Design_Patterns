@@ -13,46 +13,92 @@ using System.Threading.Tasks;
 
 //Will not be using inheritence here, will be using extension 
 
+//Fluent interface is an interface that allows you to chain several calls by returning a reference of the object you are working with
+//eg
+//public class TestClass
+//{
+//    public TestClass exampleFunction()
+//    {
+//        return this;
+//    }
+//}
+//Can then do the following:
+//var builder = new TestClass()
+//TestClass().exampleFunction().exampleFunction()
+    
+
 namespace FunctionalBuilder
 {
-    public class Person
+    public enum BreadType
     {
-        public string Name, Position;
+        Sandwich,
+        Roll,
+        Panini,
+        Baguette
+    }
+
+    public class Sandwich
+    {
+        public string Name;
+        public bool Vegetarian;
+        public bool Vegan;
+        public BreadType BreadType;
     }
 
     //sealed means cannot inherit from it, you must use extension methods. Will preserve list of mutation functions
     //The below builder used to build up object, instead of having a field for storing person, do this in build step
-    public sealed class PersonBuilder
+    public sealed class SandwichBuilder
     {
-        public readonly List<Action<Person>> Actions
-          = new List<Action<Person>>();
+        public readonly List<Action<Sandwich>> Actions
+          = new List<Action<Sandwich>>();
 
         //Add an action to a person and turn it into a func to preseve fluent interface
-        public PersonBuilder Called(string name)
+        public SandwichBuilder Called(string name)
         {
-            //Add new action to be applied to person
+            //Add new action to be applied to sandwich
             Actions.Add(p => { p.Name = name; });
             return this;
         }
 
-        public Person Build()
+        public Sandwich Build()
         {
-            var p = new Person();
-            Actions.ForEach(a => a(p));
-            return p;
+            var s = new Sandwich();
+            Actions.ForEach(a => a(s));
+            return s;
         }
     }
 
-    //Keeping to OpenClose principle, we create an extension class
-    public static class PersonBuilderExtensions
+    //Keeping to OpenClose principle, we create an extension class for functions that are to be added
+    public static class SandwhichBuilderExtension
     {
-        //passing in PersonBuilder as param in order to extend & use functions builder
-        public static PersonBuilder WorksAsA
-          (this PersonBuilder builder, string position)
+        //passing in SandwichBuilder as param in order to extend & use functions builder
+        public static SandwichBuilder Vegetarian
+          (this SandwichBuilder builder, bool veggie)
         {
-            builder.Actions.Add(p =>
+            builder.Actions.Add(s =>
             {
-                p.Position = position;
+                //If vegan, must be veggie
+                s.Vegetarian = s.Vegan?true:false;
+            });
+            return builder;
+        }
+
+        public static SandwichBuilder IsVegan
+          (this SandwichBuilder builder, bool vegan)
+        {
+            builder.Actions.Add(s =>
+            {
+                s.Vegan = vegan;
+            });
+            return builder;
+        }
+
+        public static SandwichBuilder WhichBreadType
+          (this SandwichBuilder builder, BreadType breadType)
+        {
+            builder.Actions.Add(s =>
+            {
+                s.BreadType = breadType;
             });
             return builder;
         }
@@ -62,8 +108,8 @@ namespace FunctionalBuilder
     {
         public static void Main(string[] args)
         {
-            var pb = new PersonBuilder();
-            var person = pb.Called("Dmitri").WorksAsA("Programmer").Build();
+            var sb = new SandwichBuilder();
+            var sandwhich = sb.Called("The Whopper").IsVegan(true).Vegetarian(false).WhichBreadType(BreadType.Panini).Build();
         }
     }
 }
