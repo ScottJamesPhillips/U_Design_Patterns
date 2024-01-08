@@ -16,28 +16,43 @@ namespace FacetedBuilder
     public class FootballTeam
     {
         // info
-        public string Name, City, StreetAddress, Postcode;
-        
+        public string Name, StripColour;
+
         //stadium info
         public Stadium Stadium;
 
         // squads
-        public List<Players> Squad;
+        public List<Player> Squad;
 
-        //public override string ToString()
-        //{
-        //    return $"{nameof(StreetAddress)}: {StreetAddress}, {nameof(Postcode)}: {Postcode}, {nameof(City)}: {City}, {nameof(CompanyName)}: {CompanyName}, {nameof(Position)}: {Position}, {nameof(AnnualIncome)}: {AnnualIncome}";
-        //}
+        public override string ToString()
+        {
+            return $"Team Name: {Name}, Team Colour: {StripColour}, \n" +
+                $"Stadium Info \n" +
+                $"Name: {Stadium.Name}, {nameof(Stadium.Capacity)}: {Stadium.Capacity}, {nameof(Stadium.Address)}: {Stadium.Address}, {nameof(Stadium.Postcode)}: {Stadium.Postcode}\n" +
+                $"Squad List \n " +
+                $"{SquadAsString()}";
+        }
+
+        public string SquadAsString()
+        {
+            string list = "";
+            foreach(Player p in Squad)
+            {
+                list += $"{nameof(p.FirstName)}: {p.FirstName}, {nameof(p.LastName)}: {p.LastName}, {nameof(p.SquadNumber)}: {p.SquadNumber}, {nameof(p.Position)}: {p.Position} \n";
+            }
+            return list;
+        }
     }
 
     public class Stadium
     {
         public string Name;
         public string Address;
+        public string Postcode;
         public int Capacity;
     }
 
-    public class Players
+    public class Player
     {
         public string FirstName;
         public string LastName;
@@ -51,40 +66,15 @@ namespace FacetedBuilder
         // the object we're going to build
         protected FootballTeam team = new FootballTeam(); // this is a reference!
 
-        public FootballTeamInfoBuilder Lives => new FootballTeamInfoBuilder(team);
-        //public PersonJobBuilder Works => new PersonJobBuilder(team);
+        public FootballTeamInfoBuilder Information => new FootballTeamInfoBuilder(team);
+        public FootballTeamStadiumBuilder Stadium => new FootballTeamStadiumBuilder(team);
+        public FootballTeamSquadBuilder Squad => new FootballTeamSquadBuilder(team);
 
         public static implicit operator FootballTeam(FootballTeamBuilder ftb)
         {
             return ftb.team;
         }
     }
-
-    //public class PersonJobBuilder : PersonBuilder
-    //{
-    //    public PersonJobBuilder(Person person)
-    //    {
-    //        this.person = person;
-    //    }
-
-    //    public PersonJobBuilder At(string companyName)
-    //    {
-    //        person.CompanyName = companyName;
-    //        return this;
-    //    }
-
-    //    public PersonJobBuilder AsA(string position)
-    //    {
-    //        person.Position = position;
-    //        return this;
-    //    }
-
-    //    public PersonJobBuilder Earning(int annualIncome)
-    //    {
-    //        person.AnnualIncome = annualIncome;
-    //        return this;
-    //    }
-    //}
 
     public class FootballTeamInfoBuilder : FootballTeamBuilder
     {
@@ -94,42 +84,110 @@ namespace FacetedBuilder
             this.team = team;
         }
 
-        public FootballTeamInfoBuilder At(string streetAddress)
+        public FootballTeamInfoBuilder Name(string name)
         {
-            team.StreetAddress = streetAddress;
+            team.Name = name;
             return this;
         }
 
-        public FootballTeamInfoBuilder WithPostcode(string postcode)
+        public FootballTeamInfoBuilder Strip(string strip)
         {
-            team.Postcode = postcode;
-            return this;
-        }
-
-        public FootballTeamInfoBuilder In(string city)
-        {
-            team.City = city;
+            team.StripColour = strip;
             return this;
         }
 
     }
 
+    public class FootballTeamStadiumBuilder:FootballTeamBuilder
+    {
+        protected Stadium stadium = new Stadium(); 
+        public FootballTeamStadiumBuilder(FootballTeam team)
+        {
+            this.team = team;
+            this.team.Stadium = stadium;
+        }
+
+        public FootballTeamStadiumBuilder Name(string name)
+        {
+            stadium.Name = name;
+            return this;
+        }
+        public FootballTeamStadiumBuilder Capacity(int capacity)
+        {
+            stadium.Capacity= capacity;
+            return this;
+        }
+        public FootballTeamStadiumBuilder Postcode(string postcode)
+        {
+            stadium.Postcode = postcode;
+            return this;
+        }
+        public FootballTeamStadiumBuilder Address(string address)
+        {
+            stadium.Address = address;
+            return this;
+        }
+    }
+
+    public class FootballTeamSquadBuilder : FootballTeamBuilder
+    {
+        protected List<Player> players = new List<Player>();
+        protected Player player = new Player();
+        public FootballTeamSquadBuilder(FootballTeam team)
+        {
+            this.team = team;
+            this.team.Squad = players; 
+        }
+
+        public FootballTeamSquadBuilder PlayerFirstName(string name)
+        {
+            player.FirstName = name;
+            return this;
+        }
+        public FootballTeamSquadBuilder PlayerLastName(string name)
+        {
+            player.LastName = name;
+            return this;
+        }
+        public FootballTeamSquadBuilder PlayerSquadNumber(int number)
+        {
+            player.SquadNumber = number;
+            return this;
+        }
+        public FootballTeamSquadBuilder PlayerPosition(string position)
+        {
+            player.Position = position;
+            return this;
+        }
+        public FootballTeamSquadBuilder AddPlayer()
+        {
+            players.Add(player);
+            return this;
+        }
+    }
     public class Demo
     {
         static void Main(string[] args)
         {
-            var pb = new FootballTeamBuilder();
-            FootballTeam person = pb
-              .Lives
-                .At("123 London Road")
-                .In("London")
-                .WithPostcode("SW12BC")
-              //.Works
-              //  .At("Fabrikam")
-              //  .AsA("Engineer")
-              //  .Earning(123000);
-
-            Console.WriteLine(person);
+            var ftb = new FootballTeamBuilder();
+            FootballTeam team = ftb
+              .Information
+                .Name("Londinium Club de Football")
+                .Strip("Blue")
+              .Stadium
+                .Name("Really Nice Stadium")
+                .Capacity(100001)
+                .Postcode("SW1 1ST")
+                .Address("123 London Street")
+            .Squad
+                .PlayerFirstName("Roxanne")
+                .PlayerLastName("Luis")
+                .PlayerSquadNumber(3)
+                .PlayerPosition("Left Back")
+                .AddPlayer();
+            
+            Console.WriteLine(team.ToString());
+            Console.ReadLine();
         }
     }
 }
